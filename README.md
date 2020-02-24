@@ -2,14 +2,6 @@
 
 TODO: add a description
 
-#### Main view
-
-![Page view](docs/page.png)
-
-#### Details view
-
-![Page view](docs/details.png)
-
 ## Project consists of(Most important listed):
 
 ### API endpoint
