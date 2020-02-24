@@ -2,6 +2,11 @@
 
 TODO: add a description
 
+# TODO:
+
+1. Update tests configuration - fix @import SCSS
+2. Test many api keys - [football](https://www.football-data.org/)
+
 ## Project consists of(Most important listed):
 
 ### API endpoint
