@@ -1,0 +1,49 @@
+body {
+  background: $bodyBackground;
+  color: $darkGray;
+}
+
+.row-spacing > *:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.row-spacing-double > *:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.row-spacing-half > *:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.col-spacing > *:not(:last-child) {
+  margin-right: 12px;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+h3,
+h4 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: $baseFontSize * 3;
+  margin: $baseFontSize 0 $baseFontSize * 2;
+}
+
+h4 {
+  font-size: $baseFontSize * 1.2;
+  margin: $baseFontSize 0;
+}
+
+a {
+  text-decoration: none;
+  color: $customGreen;
+}
+
+ul {
+  list-style: none;
+}
