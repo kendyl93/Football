@@ -4,13 +4,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
+import rootReducer from './src/stores/rootReducers';
 import App from './src/App';
 
 import './index.scss';
-
-const rootReducer = combineReducers({});
 
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
