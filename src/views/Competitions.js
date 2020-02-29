@@ -12,6 +12,7 @@ import {
 class CompetitionsView extends Component {
   componentDidMount() {
     const { fetchApi } = this.props;
+    console.log({ fetchApi });
     fetchApi();
   }
 
@@ -23,11 +24,22 @@ class CompetitionsView extends Component {
   //   }
 
   render() {
-    const { competitions, pending } = this.props;
+    const { competitions, pending } = this.props || {};
+    console.log({ cAAAA: competitions, pending, propy: this.props });
 
     return (
       <div className="product-list-wrapper">
         {pending ? <h1>Loading...</h1> : <h1>done</h1>}
+        {competitions &&
+          competitions.competitions &&
+          competitions.competitions.map(({ homeTeam, awayTeam } = {}) => (
+            <h3>
+              <span>{homeTeam.name}</span>
+
+              <span>-</span>
+              <span>{awayTeam.name}</span>
+            </h3>
+          ))}
       </div>
     );
   }

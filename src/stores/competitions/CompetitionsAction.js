@@ -7,9 +7,9 @@ export function requestCompetitions() {
   };
 }
 
-export function fetchCompetitionsFinished(competitions) {
+export function fetchCompetitionsFinished(matches) {
   return {
     type: REQUEST_COMPETITIONS_FINISHED,
-    competitions
+    competitions: matches
   };
 }

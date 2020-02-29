@@ -19,7 +19,7 @@ export function competitionsReducer(state = initialState, action) {
       return {
         ...state,
         pending: false,
-        competitions: action.payload
+        competitions: action.competitions
       };
     default:
       return state;

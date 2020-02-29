@@ -48,8 +48,11 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: '/'
-    // hot: true
+    contentBase: '/',
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    hot: true
   },
   devtool: 'cheap-module-eval-source-map',
   plugins: [
