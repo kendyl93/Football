@@ -1,21 +1,18 @@
-import {
-  REQUEST_COMPETITIONS,
-  REQUEST_COMPETITIONS_FINISHED
-} from './CompetitionsAction';
+import { REQUEST_MATCHES, REQUEST_MATCHES_FINISHED } from './matchesAction';
 
 const initialState = {
   pending: false,
   matches: []
 };
 
-export function competitionsReducer(state = initialState, action) {
+export function matchesReducer(state = initialState, action) {
   switch (action.type) {
-    case REQUEST_COMPETITIONS:
+    case REQUEST_MATCHES:
       return {
         ...state,
         pending: true
       };
-    case REQUEST_COMPETITIONS_FINISHED:
+    case REQUEST_MATCHES_FINISHED:
       return {
         ...state,
         pending: false,
@@ -27,4 +24,4 @@ export function competitionsReducer(state = initialState, action) {
 }
 
 export const getMatches = state => state.matches;
-export const getCompetitionsPending = state => state.pending;
+export const getMatchesPending = state => state.pending;

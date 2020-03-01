@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-import {
-  requestCompetitions,
-  fetchCompetitionsFinished
-} from './CompetitionsAction';
+import { requestMatches, fetchMatchesFinished } from './matchesAction';
 import { API_KEYS } from '../../environments/.development';
 
 const isoDateWithoutTime = date => {
@@ -29,20 +26,20 @@ const rangeToISOStringWithoutTime = (from = new Date(), to = new Date()) => {
 
 function fetchApi() {
   return async dispatch => {
-    dispatch(requestCompetitions({ pending: true }));
+    dispatch(requestMatches({ pending: true }));
     const [from, to] = rangeToISOStringWithoutTime();
 
     try {
-      const { data } = await axios.get(
+      const {
+        data: { matches }
+      } = await axios.get(
         `http://api.football-data.org/v2/matches/?dateFrom=${from}&dateTo=${to}`,
         {
           headers: { 'X-Auth-Token': API_KEYS[0] }
         }
       );
 
-      dispatch(fetchCompetitionsFinished(data.matches));
-
-      return data;
+      dispatch(fetchMatchesFinished(matches));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);

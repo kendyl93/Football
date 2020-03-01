@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { competitionsReducer } from './competitions/CompetitionsReducers';
+import { matchesReducer } from './matches/matchesReducer';
 
-const rootReducer = combineReducers({ matches: competitionsReducer });
+const rootReducer = combineReducers({ matches: matchesReducer });
 
 export default rootReducer;
