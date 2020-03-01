@@ -1,5 +1,5 @@
 import { requestMatches, fetchMatchesFinished } from './matchesAction';
-import { MATCHES_ENDPOINT, fetchData, getMatchesInDateRange } from '../../api';
+import { getMatchesInDateRange } from '../../api/matches';
 import { rangeToISOStringWithoutTime } from '../../utils/date';
 
 const fetchApi = () => async dispatch => {
