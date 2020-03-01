@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import fetchApi from '../stores/competitions/CompetitionsEffect';
 import {
-  getCompetitions,
+  getMatches,
   getCompetitionsPending
 } from '../stores/competitions/CompetitionsReducers';
 
@@ -24,15 +24,15 @@ class CompetitionsView extends Component {
   //   }
 
   render() {
-    const { competitions, pending } = this.props || {};
-    console.log({ cAAAA: competitions, pending, propy: this.props });
+    const { matches, pending } = this.props || {};
+    console.log({ matches });
 
     return (
       <div className="product-list-wrapper">
         {pending ? <h1>Loading...</h1> : <h1>done</h1>}
-        {competitions &&
-          competitions.competitions &&
-          competitions.competitions.map(({ homeTeam, awayTeam } = {}) => (
+        {matches &&
+          matches.matches &&
+          matches.matches.map(({ homeTeam, awayTeam } = {}) => (
             <h3>
               <span>{homeTeam.name}</span>
 
@@ -45,7 +45,7 @@ class CompetitionsView extends Component {
   }
 }
 const mapStateToProps = state => ({
-  competitions: getCompetitions(state),
+  matches: getMatches(state),
   pending: getCompetitionsPending(state)
 });
 

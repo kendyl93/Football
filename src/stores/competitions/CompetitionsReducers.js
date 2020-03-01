@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   pending: false,
-  competitions: []
+  matches: []
 };
 
 export function competitionsReducer(state = initialState, action) {
@@ -16,15 +16,17 @@ export function competitionsReducer(state = initialState, action) {
         pending: true
       };
     case REQUEST_COMPETITIONS_FINISHED:
+      console.log({ AAAAAA: action });
+
       return {
         ...state,
         pending: false,
-        competitions: action.competitions
+        matches: action.matches
       };
     default:
       return state;
   }
 }
 
-export const getCompetitions = state => state.competitions;
+export const getMatches = state => state.matches;
 export const getCompetitionsPending = state => state.pending;

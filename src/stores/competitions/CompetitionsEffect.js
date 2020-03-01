@@ -12,7 +12,7 @@ function fetchApi() {
 
     try {
       const { data } = await axios.get(
-        'http://api.football-data.org/v2/competitions/2002/matches/?dateFrom=2020-02-29&dateTo=2020-02-29',
+        'http://api.football-data.org/v2/matches/?dateFrom=2020-03-01&dateTo=2020-03-01',
         {
           headers: { 'X-Auth-Token': API_KEYS[0] }
         }

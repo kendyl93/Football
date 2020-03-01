@@ -10,6 +10,6 @@ export function requestCompetitions() {
 export function fetchCompetitionsFinished(matches) {
   return {
     type: REQUEST_COMPETITIONS_FINISHED,
-    competitions: matches
+    matches
   };
 }
