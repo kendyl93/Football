@@ -24,26 +24,32 @@ const rangeToISOStringWithoutTime = (from = new Date(), to = new Date()) => {
   return [fromISODateWithoutTime, toISODateWithoutTime];
 };
 
+const getMatchesInDateRange = async (from, to) => {
+  try {
+    const {
+      data: { matches }
+    } = await axios.get(
+      `http://api.football-data.org/v2/matches/?dateFrom=${from}&dateTo=${to}`,
+      {
+        headers: { 'X-Auth-Token': API_KEYS[0] }
+      }
+    );
+
+    return matches;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+};
+
 function fetchApi() {
   return async dispatch => {
     dispatch(requestMatches({ pending: true }));
+
     const [from, to] = rangeToISOStringWithoutTime();
+    const matches = await getMatchesInDateRange(from, to);
 
-    try {
-      const {
-        data: { matches }
-      } = await axios.get(
-        `http://api.football-data.org/v2/matches/?dateFrom=${from}&dateTo=${to}`,
-        {
-          headers: { 'X-Auth-Token': API_KEYS[0] }
-        }
-      );
-
-      dispatch(fetchMatchesFinished(matches));
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-    }
+    dispatch(fetchMatchesFinished(matches));
   };
 }
 
