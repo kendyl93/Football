@@ -16,8 +16,6 @@ export function competitionsReducer(state = initialState, action) {
         pending: true
       };
     case REQUEST_COMPETITIONS_FINISHED:
-      console.log({ AAAAAA: action });
-
       return {
         ...state,
         pending: false,

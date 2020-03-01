@@ -1,18 +1,18 @@
-export default class EffectUtility {
-  static async createThunkEffect(dispatch, actionType, effect, ...args) {
-    dispatch(ActionUtility.createAction(actionType));
+// export default class EffectUtility {
+//   static async createThunkEffect(dispatch, actionType, effect, ...args) {
+//     dispatch(ActionUtility.createAction(actionType));
 
-    const model = await effect(...args);
-    const isError = model instanceof HttpErrorResponseModel;
+//     const model = await effect(...args);
+//     const isError = model instanceof HttpErrorResponseModel;
 
-    dispatch(
-      ActionUtility.createAction(`${actionType}_FINISHED`, model, isError)
-    );
+//     dispatch(
+//       ActionUtility.createAction(`${actionType}_FINISHED`, model, isError)
+//     );
 
-    return model;
-  }
+//     return model;
+//   }
 
-  static createAction(type, payload, error = false, meta = null) {
-    return { type, payload, error, meta };
-  }
-}
+//   static createAction(type, payload, error = false, meta = null) {
+//     return { type, payload, error, meta };
+//   }
+// }

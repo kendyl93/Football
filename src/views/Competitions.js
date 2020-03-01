@@ -12,20 +12,12 @@ import {
 class CompetitionsView extends Component {
   componentDidMount() {
     const { fetchApi } = this.props;
-    console.log({ fetchApi });
+
     fetchApi();
   }
 
-  //   shouldComponentRender() {
-  //     const { pending } = this.props;
-  //     if (this.pending === false) return false;
-  //     // more tests
-  //     return true;
-  //   }
-
   render() {
     const { matches, pending } = this.props || {};
-    console.log({ matches });
 
     return (
       <div className="product-list-wrapper">
@@ -44,6 +36,11 @@ class CompetitionsView extends Component {
     );
   }
 }
+
+CompetitionsView.propTypes = {
+  fetchApi: PropTypes.func
+};
+
 const mapStateToProps = state => ({
   matches: getMatches(state),
   pending: getCompetitionsPending(state)
