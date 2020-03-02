@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import fetchApi from '../stores/matches/matchesEffect';
+import fetchApi from '../../stores/matches/matchesEffect';
 import {
   getMatches,
   getMatchesPending
-} from '../stores/matches/matchesReducer';
+} from '../../stores/matches/matchesReducer';
+import Matches from './Matches';
 
 const MatchesView = ({ fetchApi, matches = [], pending }) => {
   useEffect(() => {
@@ -16,18 +17,7 @@ const MatchesView = ({ fetchApi, matches = [], pending }) => {
 
   return (
     <div className="product-list-wrapper">
-      {pending ? (
-        <h1>Loading...</h1>
-      ) : (
-        matches.map(({ id, homeTeam, awayTeam } = {}) => (
-          <div key={id}>
-            <span>{homeTeam.name}</span>
-
-            <span> - </span>
-            <span>{awayTeam.name}</span>
-          </div>
-        ))
-      )}
+      {pending ? <h1>Loading...</h1> : <Matches matches={matches} />}
     </div>
   );
 };

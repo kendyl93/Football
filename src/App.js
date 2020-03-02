@@ -5,7 +5,7 @@ import MatchesView from './views/Matches';
 
 const App = () => (
   <main className="app">
-    <h1>App</h1>
+    <h1>Footly</h1>
     <MatchesView />
   </main>
 );
