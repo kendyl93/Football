@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,39 +9,38 @@ import {
   getMatchesPending
 } from '../stores/matches/matchesReducer';
 
-class MatchesView extends Component {
-  componentDidMount() {
-    const { fetchApi } = this.props;
-
+const MatchesView = ({ fetchApi, matches = [], pending }) => {
+  useEffect(() => {
     fetchApi();
-  }
+  }, [fetchApi]);
 
-  render() {
-    const { matches: { matches = [], pending } = {} } = this.props || {};
-
-    return (
-      <div className="product-list-wrapper">
-        {pending ? <h1>Loading...</h1> : <h1>done</h1>}
-        {matches.map(({ homeTeam, awayTeam } = {}) => (
-          <div>
+  return (
+    <div className="product-list-wrapper">
+      {pending ? (
+        <h1>Loading...</h1>
+      ) : (
+        matches.map(({ id, homeTeam, awayTeam } = {}) => (
+          <div key={id}>
             <span>{homeTeam.name}</span>
 
-            <span>-</span>
+            <span> - </span>
             <span>{awayTeam.name}</span>
           </div>
-        ))}
-      </div>
-    );
-  }
-}
-
-MatchesView.propTypes = {
-  fetchApi: PropTypes.func
+        ))
+      )}
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-  matches: getMatches(state),
-  pending: getMatchesPending(state)
+MatchesView.propTypes = {
+  fetchApi: PropTypes.func,
+  matches: PropTypes.array,
+  pending: PropTypes.bool
+};
+
+const mapStateToProps = ({ matchesData }) => ({
+  matches: getMatches(matchesData),
+  pending: getMatchesPending(matchesData)
 });
 
 const mapDispatchToProps = dispatch =>
