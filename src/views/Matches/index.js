@@ -16,18 +16,17 @@ const MatchesView = ({
   fetchMatches,
   matches = [],
   pending,
-  sourceDateRange = []
+  sourceDateRange: [sourceFrom, sourceTo] = []
 }) => {
-  useEffect(() => {
-    const [sourceFrom, sourceTo] = sourceDateRange;
-    const [from, to] = rangeToISOStringWithoutTime(sourceFrom, sourceTo);
-    const anyMatches = matches.length > 0;
-    if (!anyMatches) {
-      fetchMatches(from, to);
-    }
-  }, [fetchMatches, matches.length, sourceDateRange]);
+  const ISOFormatDateRange = rangeToISOStringWithoutTime(sourceFrom, sourceTo);
+  const anyMatches = matches.length > 0;
 
-  const dateRange = rangeToISOStringWithoutTime();
+  useEffect(() => {
+    if (!anyMatches) {
+      const [ISOFrom, ISOTo] = ISOFormatDateRange;
+      fetchMatches(ISOFrom, ISOTo);
+    }
+  }, [ISOFormatDateRange, anyMatches, fetchMatches]);
 
   return (
     <div className="product-list-wrapper">
@@ -35,7 +34,7 @@ const MatchesView = ({
         <h1>Loading...</h1>
       ) : (
         <div>
-          <DateHeader dateRange={dateRange} />
+          <DateHeader dateRange={ISOFormatDateRange} />
           <Matches matches={matches} />
         </div>
       )}
