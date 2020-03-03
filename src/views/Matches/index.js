@@ -12,6 +12,7 @@ import {
 import Matches from './Matches';
 import { getMatchesByDateRange } from '../../api/matches';
 import DateHeader from '../DateHeader';
+import { any } from '../../utils/array';
 
 const MatchesView = ({
   fetchMatches,
@@ -19,22 +20,24 @@ const MatchesView = ({
   pending,
   sourceDateRange: [sourceFrom, sourceTo] = []
 }) => {
-  // const [fromState, setFromState] = useState(sourceFrom)
-  const [ISOFormatDateRange, setISO] = useState(
-    rangeToISOStringWithoutTime(sourceFrom, sourceTo)
+  const sourceISOFormatDateRange = rangeToISOStringWithoutTime(
+    sourceFrom,
+    sourceTo
   );
-  const anyMatches = matches.length > 0;
+  const [ISOFormatDateRange] = useState(sourceISOFormatDateRange);
+  const anyMatches = any(matches);
 
   useEffect(() => {
-    if (
-      ISOFormatDateRange !== rangeToISOStringWithoutTime(sourceFrom, sourceTo)
-    ) {
-      console.log('SMIANA');
+    const sourceISOFormatDareRange = rangeToISOStringWithoutTime(
+      sourceFrom,
+      sourceTo
+    );
+    const maybeRangeChange = ISOFormatDateRange !== sourceISOFormatDareRange;
 
-      getMatchesByDateRange(rangeToISOStringWithoutTime(sourceFrom, sourceTo))(
-        fetchMatches
-      );
+    if (maybeRangeChange) {
+      getMatchesByDateRange(sourceISOFormatDareRange)(fetchMatches);
     }
+
     if (anyMatches) {
       return;
     }
@@ -48,7 +51,7 @@ const MatchesView = ({
         <h1>Loading...</h1>
       ) : (
         <div>
-          <DateHeader dateRange={ISOFormatDateRange} />
+          <DateHeader dateRange={sourceISOFormatDateRange} />
           <Matches matches={matches} />
         </div>
       )}

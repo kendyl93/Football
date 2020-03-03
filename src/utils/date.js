@@ -1,3 +1,5 @@
+import { equal } from './array';
+
 const isoDateWithoutTime = date => {
   const dateISODateWithTime = date.toISOString();
   const indexOfDateTime = dateISODateWithTime.indexOf('T');
@@ -5,6 +7,19 @@ const isoDateWithoutTime = date => {
   const ISODateWithoutTime = dateISODateWithTime.slice(0, indexOfDateTime);
 
   return ISODateWithoutTime;
+};
+
+export const transformDateMonthAndYearToArray = (date = new Date()) => [
+  date.getDate(),
+  date.getMonth(),
+  date.getFullYear()
+];
+
+export const datesEqual = (a, b) => {
+  const aDateMonthandYear = transformDateMonthAndYearToArray(a);
+  const bDateMonthandYear = transformDateMonthAndYearToArray(b);
+
+  return equal(aDateMonthandYear, bDateMonthandYear);
 };
 
 export const rangeToISOStringWithoutTime = (
