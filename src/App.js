@@ -10,18 +10,19 @@ const setDayForward = baseDate => baseDate.setDate(baseDate.getDate() + 1);
 const App = () => {
   const today = new Date(new Date().setHours(9, 0, 0, 0));
   const [dateRange, setDateRange] = useState([today, today]);
+  const fromDay = dateRange[0];
 
   const handleToday = () => {
     setDateRange([today, today]);
   };
 
   const handleDayBack = () => {
-    const oneDayBack = new Date(setDayBack(dateRange[0]));
+    const oneDayBack = new Date(setDayBack(fromDay));
 
     setDateRange([oneDayBack, oneDayBack]);
   };
   const handleDayForward = () => {
-    const oneDayForward = new Date(setDayForward(dateRange[0]));
+    const oneDayForward = new Date(setDayForward(fromDay));
 
     setDateRange([oneDayForward, oneDayForward]);
   };
