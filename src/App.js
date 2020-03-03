@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
-import {, datesEqual } from './utils/date';
+import { datesEqual } from './utils/date';
 import MatchesView from './views/Matches';
 // import './App.scss';
+
+const setDayBack = baseDate => baseDate.setDate(baseDate.getDate() - 1);
+const setDayForward = baseDate => baseDate.setDate(baseDate.getDate() + 1);
 
 const App = () => {
   const today = new Date(new Date().setHours(9, 0, 0, 0));
@@ -13,16 +16,12 @@ const App = () => {
   };
 
   const handleDayBack = () => {
-    const oneDayBack = new Date(
-      dateRange[0].setDate(dateRange[0].getDate() - 1)
-    );
+    const oneDayBack = new Date(setDayBack(dateRange[0]));
 
     setDateRange([oneDayBack, oneDayBack]);
   };
   const handleDayForward = () => {
-    const oneDayForward = new Date(
-      dateRange[0].setDate(dateRange[0].getDate() + 1)
-    );
+    const oneDayForward = new Date(setDayForward(dateRange[0]));
 
     setDateRange([oneDayForward, oneDayForward]);
   };
