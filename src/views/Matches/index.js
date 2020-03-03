@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { rangeToISOStringWithoutTime } from '../../utils/date';
-import fetchApi from '../../stores/matches/matchesEffect';
+import fetchMatches from '../../stores/matches/matchesEffect';
 import {
   getMatches,
   getMatchesPending
@@ -13,7 +13,7 @@ import Matches from './Matches';
 import DateHeader from '../DateHeader';
 
 const MatchesView = ({
-  fetchApi,
+  fetchMatches,
   matches = [],
   pending,
   sourceDateRange = []
@@ -23,9 +23,9 @@ const MatchesView = ({
     const [from, to] = rangeToISOStringWithoutTime(sourceFrom, sourceTo);
     const anyMatches = matches.length > 0;
     if (!anyMatches) {
-      fetchApi(from, to);
+      fetchMatches(from, to);
     }
-  }, [fetchApi, matches.length, sourceDateRange]);
+  }, [fetchMatches, matches.length, sourceDateRange]);
 
   const dateRange = rangeToISOStringWithoutTime();
 
@@ -44,7 +44,7 @@ const MatchesView = ({
 };
 
 MatchesView.propTypes = {
-  fetchApi: PropTypes.func,
+  fetchMatches: PropTypes.func,
   matches: PropTypes.array,
   pending: PropTypes.bool,
   sourceDateRange: PropTypes.array
@@ -58,7 +58,7 @@ const mapStateToProps = ({ matchesData }) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchApi
+      fetchMatches
     },
     dispatch
   );
