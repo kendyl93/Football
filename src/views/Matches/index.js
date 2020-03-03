@@ -12,11 +12,20 @@ import {
 import Matches from './Matches';
 import DateHeader from '../DateHeader';
 
-const MatchesView = ({ fetchApi, matches = [], pending }) => {
+const MatchesView = ({
+  fetchApi,
+  matches = [],
+  pending,
+  sourceDateRange = []
+}) => {
   useEffect(() => {
-    const [from, to] = rangeToISOStringWithoutTime();
-    fetchApi(from, to);
-  }, [fetchApi]);
+    const [sourceFrom, sourceTo] = sourceDateRange;
+    const [from, to] = rangeToISOStringWithoutTime(sourceFrom, sourceTo);
+    const anyMatches = matches.length > 0;
+    if (!anyMatches) {
+      fetchApi(from, to);
+    }
+  }, [fetchApi, matches.length, sourceDateRange]);
 
   const dateRange = rangeToISOStringWithoutTime();
 
@@ -37,7 +46,8 @@ const MatchesView = ({ fetchApi, matches = [], pending }) => {
 MatchesView.propTypes = {
   fetchApi: PropTypes.func,
   matches: PropTypes.array,
-  pending: PropTypes.bool
+  pending: PropTypes.bool,
+  sourceDateRange: PropTypes.array
 };
 
 const mapStateToProps = ({ matchesData }) => ({
