@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,16 +19,28 @@ const MatchesView = ({
   pending,
   sourceDateRange: [sourceFrom, sourceTo] = []
 }) => {
-  const ISOFormatDateRange = rangeToISOStringWithoutTime(sourceFrom, sourceTo);
+  // const [fromState, setFromState] = useState(sourceFrom)
+  const [ISOFormatDateRange, setISO] = useState(
+    rangeToISOStringWithoutTime(sourceFrom, sourceTo)
+  );
   const anyMatches = matches.length > 0;
 
   useEffect(() => {
+    if (
+      ISOFormatDateRange !== rangeToISOStringWithoutTime(sourceFrom, sourceTo)
+    ) {
+      console.log('SMIANA');
+
+      getMatchesByDateRange(rangeToISOStringWithoutTime(sourceFrom, sourceTo))(
+        fetchMatches
+      );
+    }
     if (anyMatches) {
       return;
     }
 
     getMatchesByDateRange(ISOFormatDateRange)(fetchMatches);
-  }, [ISOFormatDateRange, anyMatches, fetchMatches]);
+  }, [ISOFormatDateRange, anyMatches, fetchMatches, sourceFrom, sourceTo]);
 
   return (
     <div className="product-list-wrapper">
