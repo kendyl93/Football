@@ -10,6 +10,7 @@ import {
   getMatchesPending
 } from '../../stores/matches/matchesReducer';
 import Matches from './Matches';
+import { getMatchesByDateRange } from '../../api/matches';
 import DateHeader from '../DateHeader';
 
 const MatchesView = ({
@@ -22,10 +23,11 @@ const MatchesView = ({
   const anyMatches = matches.length > 0;
 
   useEffect(() => {
-    if (!anyMatches) {
-      const [ISOFrom, ISOTo] = ISOFormatDateRange;
-      fetchMatches(ISOFrom, ISOTo);
+    if (anyMatches) {
+      return;
     }
+
+    getMatchesByDateRange(ISOFormatDateRange)(fetchMatches);
   }, [ISOFormatDateRange, anyMatches, fetchMatches]);
 
   return (
