@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,26 +24,16 @@ const MatchesView = ({
     sourceFrom,
     sourceTo
   );
-  const [ISOFormatDateRange] = useState(sourceISOFormatDateRange);
-  const anyMatches = any(matches);
 
   useEffect(() => {
-    const sourceISOFormatDareRange = rangeToISOStringWithoutTime(
-      sourceFrom,
-      sourceTo
-    );
-    const maybeRangeChange = ISOFormatDateRange !== sourceISOFormatDareRange;
+    getMatchesByDateRange(sourceISOFormatDateRange)(fetchMatches);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    if (maybeRangeChange) {
-      getMatchesByDateRange(sourceISOFormatDareRange)(fetchMatches);
-    }
-
-    if (anyMatches) {
-      return;
-    }
-
-    getMatchesByDateRange(ISOFormatDateRange)(fetchMatches);
-  }, [ISOFormatDateRange, anyMatches, fetchMatches, sourceFrom, sourceTo]);
+  useEffect(() => {
+    getMatchesByDateRange(sourceISOFormatDateRange)(fetchMatches);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sourceFrom, sourceTo]);
 
   return (
     <div className="product-list-wrapper">
