@@ -4,21 +4,36 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { rangeToISOStringWithoutTime } from '../../utils/date';
-import fetchApi from '../../stores/matches/matchesEffect';
+import fetchMatches from '../../stores/matches/matchesEffect';
 import {
   getMatches,
   getMatchesPending
 } from '../../stores/matches/matchesReducer';
 import Matches from './Matches';
+import { getMatchesByDateRange } from '../../api/matches';
 import DateHeader from '../DateHeader';
+import { any } from '../../utils/array';
 
-const MatchesView = ({ fetchApi, matches = [], pending }) => {
+const MatchesView = ({
+  fetchMatches,
+  matches = [],
+  pending,
+  sourceDateRange: [sourceFrom, sourceTo] = []
+}) => {
+  const sourceISOFormatDateRange = rangeToISOStringWithoutTime(
+    sourceFrom,
+    sourceTo
+  );
+
   useEffect(() => {
-    const [from, to] = rangeToISOStringWithoutTime();
-    fetchApi(from, to);
-  }, [fetchApi]);
+    getMatchesByDateRange(sourceISOFormatDateRange)(fetchMatches);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const dateRange = rangeToISOStringWithoutTime();
+  useEffect(() => {
+    getMatchesByDateRange(sourceISOFormatDateRange)(fetchMatches);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sourceFrom, sourceTo]);
 
   return (
     <div className="product-list-wrapper">
@@ -26,7 +41,7 @@ const MatchesView = ({ fetchApi, matches = [], pending }) => {
         <h1>Loading...</h1>
       ) : (
         <div>
-          <DateHeader dateRange={dateRange} />
+          <DateHeader dateRange={sourceISOFormatDateRange} />
           <Matches matches={matches} />
         </div>
       )}
@@ -35,9 +50,10 @@ const MatchesView = ({ fetchApi, matches = [], pending }) => {
 };
 
 MatchesView.propTypes = {
-  fetchApi: PropTypes.func,
+  fetchMatches: PropTypes.func,
   matches: PropTypes.array,
-  pending: PropTypes.bool
+  pending: PropTypes.bool,
+  sourceDateRange: PropTypes.array
 };
 
 const mapStateToProps = ({ matchesData }) => ({
@@ -48,7 +64,7 @@ const mapStateToProps = ({ matchesData }) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchApi
+      fetchMatches
     },
     dispatch
   );

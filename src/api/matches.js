@@ -3,7 +3,7 @@ import { fetchData, API_ENDPOINT } from './index';
 const MATCHES = 'matches';
 const MATCHES_ENDPOINT = `${API_ENDPOINT}/${MATCHES}`;
 
-export const getMatchesInDateRange = async (from, to) => {
+export const fetchMatchesInDateRange = async (from, to) => {
   try {
     const query = `?dateFrom=${from}&dateTo=${to}`;
     const endpoint = `${MATCHES_ENDPOINT}/${query}`;
@@ -16,4 +16,9 @@ export const getMatchesInDateRange = async (from, to) => {
     // eslint-disable-next-line no-console
     console.error(error);
   }
+};
+
+export const getMatchesByDateRange = ISOFormatDateRange => fetchMatchesCallback => {
+  const [ISOFrom, ISOTo] = ISOFormatDateRange;
+  fetchMatchesCallback(ISOFrom, ISOTo);
 };

@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Match from './Match';
+import { any } from '../../utils/array';
 
 const Matches = ({ matches }) =>
-  matches.length > 0 &&
+  any(matches) &&
   matches.map(({ id, homeTeam, awayTeam } = {}) => (
-    <Match id={id} homeTeam={homeTeam} awayTeam={awayTeam} />
+    <Match key={id} homeTeam={homeTeam} awayTeam={awayTeam} />
   ));
 
 export default Matches;
