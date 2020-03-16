@@ -21,14 +21,14 @@ const MatchesView = ({ fetchApi, matches = [], pending }) => {
   const dateRange = rangeToISOStringWithoutTime();
 
   return (
-    <div className="product-list-wrapper">
+    <div className="matches-view row-spacing">
       {pending ? (
         <h1>Loading...</h1>
       ) : (
-        <div>
+        <>
           <DateHeader dateRange={dateRange} />
           <Matches matches={matches} />
-        </div>
+        </>
       )}
     </div>
   );

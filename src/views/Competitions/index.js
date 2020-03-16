@@ -16,13 +16,11 @@ const CompetitionsView = ({ fetchApi, competitions = [], pending }) => {
   }, [fetchApi]);
 
   return (
-    <div className="product-list-wrapper">
+    <div className="competitions-view">
       {pending ? (
         <h1>Loading...</h1>
       ) : (
-        <div>
-          <Competitions competitions={competitions} />
-        </div>
+        <Competitions competitions={competitions} />
       )}
     </div>
   );
