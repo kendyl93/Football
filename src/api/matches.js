@@ -5,8 +5,7 @@ const MATCHES_ENDPOINT = `${API_ENDPOINT}/${MATCHES}`;
 
 export const getMatchesInDateRange = async (from, to) => {
   try {
-    const query = '?dateFrom=2018-15-03&dateTo=2018-15-03';
-    // const query = `?dateFrom=${from}&dateTo=${to}`;
+    const query = `?dateFrom=${from}&dateTo=${to}`;
     const endpoint = `${MATCHES_ENDPOINT}/${query}`;
     const {
       data: { matches }

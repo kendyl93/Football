@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { rangeToISOStringWithoutTime } from '../../utils/date';
+import { groupBy } from '../../utils/groupBy';
+import { COMPETITION_NAME } from './constants';
 import fetchApi from '../../stores/matches/matchesEffect';
 import {
   getMatches,
@@ -20,9 +21,7 @@ const MatchesView = ({ fetchApi, matches = [], pending }) => {
   }, [fetchApi]);
 
   const dateRange = rangeToISOStringWithoutTime();
-  const matchesGrouppedByCompetitions = _.chain(matches)
-    .groupBy('competition.name')
-    .value();
+  const matchesGrouppedByCompetitions = groupBy(COMPETITION_NAME)(matches);
 
   return (
     <div className="matches-view row-spacing">

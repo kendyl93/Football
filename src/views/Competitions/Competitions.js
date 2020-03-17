@@ -5,16 +5,14 @@ import Competition from './Competition';
 
 import './competitions.scss';
 
-const Competitions = ({ competitions }) => {
-  return (
-    <div className="competitions-wrapper">
-      {competitions.length > 0 &&
-        competitions.map(({ id, name } = {}) => (
-          <Competition key={id} name={name} />
-        ))}
-    </div>
-  );
-};
+const Competitions = ({ competitions }) => (
+  <div className="competitions-wrapper">
+    {competitions.length > 0 &&
+      competitions.map(({ id, name } = {}) => (
+        <Competition key={id} name={name} />
+      ))}
+  </div>
+);
 
 Competitions.propTypes = {
   competitions: PropTypes.array
