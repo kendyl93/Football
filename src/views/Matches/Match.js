@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Match = ({
-  id,
   homeTeam: { name: homeTeamName = '' },
   awayTeam: { name: awayTeamName = '' }
 }) => (
-  <div key={id}>
+  <div>
     <span>{homeTeamName}</span>
 
     <span> - </span>
@@ -17,7 +16,6 @@ const Match = ({
 Match.propTypes = {
   awayTeam: PropTypes.object.isRequired,
   homeTeam: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired,
   name: PropTypes.string
 };
 

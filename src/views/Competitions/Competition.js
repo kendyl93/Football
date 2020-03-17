@@ -3,14 +3,9 @@ import PropTypes from 'prop-types';
 
 import './competition.scss';
 
-const Competition = ({ id, name }) => (
-  <div className="competition" key={id}>
-    {name}
-  </div>
-);
+const Competition = ({ name }) => <div className="competition">{name}</div>;
 
 Competition.propTypes = {
-  id: PropTypes.number.isRequired,
   name: PropTypes.string
 };
 

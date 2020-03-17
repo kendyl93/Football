@@ -10,7 +10,7 @@ const Competitions = ({ competitions }) => {
     <div className="competitions-wrapper">
       {competitions.length > 0 &&
         competitions.map(({ id, name } = {}) => (
-          <Competition id={id} name={name} />
+          <Competition key={id} name={name} />
         ))}
     </div>
   );
