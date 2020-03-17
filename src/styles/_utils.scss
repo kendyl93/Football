@@ -39,6 +39,11 @@ h2 {
   margin: $baseFontSize 0 $baseFontSize * 2;
 }
 
+h3 {
+  font-size: $baseFontSize * 1.3;
+  margin: 0 0 $baseFontSize * 1;
+}
+
 h4 {
   font-size: $baseFontSize * 1.2;
   margin: $baseFontSize 0;
