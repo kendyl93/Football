@@ -1,26 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import Match from './Match';
-
-import './Matches.scss';
+import MatchesByCompetitionWidget from './byCompetitions';
 
 const Matches = ({ matches }) => {
-  console.log({ eeee: matches });
-  console.log({ EEEEE: Object.entries(matches) });
+  const competitionNameWithMatches = Object.entries(matches);
 
-  return Object.entries(matches).map(([key, competitionMatches]) => {
-    console.log('******************');
-    return (
-      <div className="competition-matches">
-        <h3>{key}</h3>
-        {competitionMatches.length > 0 &&
-          competitionMatches.map(({ id, homeTeam, awayTeam } = {}) => {
-            console.log({ competitionMatches });
-            return <Match id={id} homeTeam={homeTeam} awayTeam={awayTeam} />;
-          })}
-      </div>
-    );
-  });
+  return <MatchesByCompetitionWidget matches={competitionNameWithMatches} />;
+};
+
+Matches.propTypes = {
+  matches: PropTypes.object
 };
 
 export default Matches;

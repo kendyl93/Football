@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import MatchesView from './views/Matches';
 import CompetitionsView from './views/Competitions';
